@@ -1,0 +1,4 @@
+{"run_list":[
+    "yum::epel",
+    "recipe[dev_world]"
+  ]}
