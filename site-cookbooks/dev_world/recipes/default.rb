@@ -50,18 +50,18 @@ end
 
 git "/usr/local/src/git" do
   repository "git://git.kernel.org/pub/scm/git/git.git"
-  reference "master"
+  reference "#{node.git.version}"
   action :checkout
 end
 
 bash "install git" do
   cwd '/usr/local/src/git'
   code <<-EOC
-   make prefix=/usr/local/stow/git all
-   make prefix=/usr/local/stow/git install
+   make prefix=/usr/local/stow/#{node.git.version} all
+   make prefix=/usr/local/stow/#{node.git.version} install
   EOC
   cwd '/usr/local/stow'
   code <<-EOC
-   stow -v git
+   stow -v #{node.git.version}
   EOC
 end
