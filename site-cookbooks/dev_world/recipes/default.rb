@@ -11,7 +11,7 @@
 # Install VCS
 # The Time is GIT!!!
 
-%{git subversion mercurial}.each do |pkg|
+["git", "subversion", "mercurial"].each do |pkg|
   package pkg do
     action :install
   end
@@ -34,7 +34,7 @@ end
 
 # Build latest version git
 
-%{make gcc curl-devel expat-devel gettext-devel openssl-devel zlib-devel}.each do |pkg|
+["make", "gcc", "curl-devel","expat-devel", "gettext-devel", "openssl-devel", "zlib-devel"].each do |pkg|
   package pkg do
     action :install
   end
