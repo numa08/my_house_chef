@@ -40,9 +40,16 @@ directory "/usr/local/stow" do
   not_if { File.exists?("/usr/local/stow") }
 end
 
+["make", "gcc", "autoconf", "automake"].each do |pkg|
+  package pkg do
+    action :install
+    options "-y"
+  end
+end
+
 # Build latest version git
 
-["make", "gcc", "curl-devel","expat-devel", "gettext-devel", "openssl-devel", "zlib-devel", "perl-devel"].each do |pkg|
+["curl-devel","expat-devel", "gettext-devel", "openssl-devel", "zlib-devel", "perl-devel"].each do |pkg|
   package pkg do
     action :install
     options "-y"
