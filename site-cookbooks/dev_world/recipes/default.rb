@@ -24,9 +24,11 @@ end
   end
 end
 
-file::File.join("/etc/ld.so.conf.d/usr_local.conf", "/usr/local/lib") do
+file "/etc/ld.so.conf.d/usr_local.conf" do
   mode "0444"
   action :create_if_missing
+  content "/usr/local/lib"
+  not_if {File.exists?('/etc/ld.so.conf.d/usr_local.conf')}
 end
 
 bash "ldconfig" do
