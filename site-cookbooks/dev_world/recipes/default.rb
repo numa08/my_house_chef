@@ -109,8 +109,23 @@ bash "install zsh" do
   not_if {File.exists?('/usr/local/bin/zsh')}
 end
 
+# Build latest version vim
+
 mercurial "/usr/local/src/vim" do
   repository "https://vim.googlecode.com/hg/"
   reference "#{node.vim.version}"
   action :sync
+  not_if {File.exists?('/usr/local/bin/vim')}
+end
+
+bash "install vim" do
+  code <<-EOC
+   cd /usr/local/src/vim
+   ./configure --prefix=/usr/local/stow/vim-#{node.vim.version}
+   make
+   make install
+   cd /usr/local/stow/
+   stow -v vim-#{node.vim.version}
+  EOC
+  not_if {File.exists?('/usr/local/bin/vim')}
 end
