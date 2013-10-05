@@ -176,10 +176,12 @@ end
 bash "install tmux" do
   code <<-EOC
    cd /usr/local/src/tmux
-   autoconf
+   sh autogen.sh
    ./configure --prefix=/usr/local/stow/tmux-#{node.tmux.version}
    make
    make install
+   cd /usr/local/stow
+   stow -v tmux-#{node.tmux.version}
   EOC
   not_if {File.exists?("/usr/local/bin/tmux")}
 end 
