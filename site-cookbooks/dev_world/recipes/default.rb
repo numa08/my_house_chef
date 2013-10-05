@@ -14,6 +14,7 @@
 ["git", "subversion", "mercurial"].each do |pkg|
   package pkg do
     action :install
+    options "--force-yes"
   end
 end
 
@@ -22,6 +23,7 @@ end
 
 package "stow" do
   action :install
+  options "--force-yes"
 end
 
 directory "/usr/local/stow" do
@@ -29,7 +31,7 @@ directory "/usr/local/stow" do
   group "root"
   mode 0755
   action :create
-  no_if { File.exists "/usr/local/stow" }
+  not_if { File.exists "/usr/local/stow" }
 end
 
 # Build latest version git
@@ -37,6 +39,7 @@ end
 ["make", "gcc", "curl-devel","expat-devel", "gettext-devel", "openssl-devel", "zlib-devel"].each do |pkg|
   package pkg do
     action :install
+    options "--force-yes"
   end
 end
 
@@ -45,7 +48,7 @@ directory "/usr/local/src" do
   group "root"
   mode 0755
   action :create
-  no_if { File.exists "/usr/local/src"}
+  not_if { File.exists "/usr/local/src"}
 end
 
 git "/usr/local/src/git" do
