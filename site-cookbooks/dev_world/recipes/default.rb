@@ -86,3 +86,27 @@ package "git" do
   action :remove
   options "-y"
 end
+
+# Build latest version zsh
+
+git "/usr/local/src/zsh" do
+  repository "git://git.code.sf.net/p/zsh/code"
+  reference "#{node.zsh.version}"
+  action :checkout
+  not_if {File.exists?('/usr/local/bin/zsh')}
+end
+
+bash "install zsh" do
+  code <<-EOC
+   cd /usr/local/src/zsh
+   autoconf
+   ./configure --prefix=/usr/local/stow/zsh-#{node.zsh.version}
+   make
+   make install
+   cd /usr/local/stow/
+   stow -v zsh-#{node.zsh.version}
+  EOC
+  not_if {File.exists?('/usr/local/bin/zsh')}
+end
+
+
