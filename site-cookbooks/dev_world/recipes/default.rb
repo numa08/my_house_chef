@@ -14,7 +14,7 @@
 ["git", "subversion", "mercurial"].each do |pkg|
   package pkg do
     action :install
-    options "--force-yes"
+    options "-y"
   end
 end
 
@@ -23,7 +23,7 @@ end
 
 package "stow" do
   action :install
-  options "--force-yes"
+  options "-y"
 end
 
 directory "/usr/local/stow" do
@@ -31,15 +31,15 @@ directory "/usr/local/stow" do
   group "root"
   mode 0755
   action :create
-  not_if { File.exists "/usr/local/stow" }
+  not_if { File.exists?("/usr/local/stow") }
 end
 
 # Build latest version git
 
-["make", "gcc", "curl-devel","expat-devel", "gettext-devel", "openssl-devel", "zlib-devel"].each do |pkg|
+["make", "gcc", "curl-devel","expat-devel", "gettext-devel", "openssl-devel", "zlib-devel", "perl-devel"].each do |pkg|
   package pkg do
     action :install
-    options "--force-yes"
+    options "-y"
   end
 end
 
@@ -48,7 +48,7 @@ directory "/usr/local/src" do
   group "root"
   mode 0755
   action :create
-  not_if { File.exists "/usr/local/src"}
+  not_if { File.exists?("/usr/local/src")}
 end
 
 git "/usr/local/src/git" do
@@ -58,13 +58,17 @@ git "/usr/local/src/git" do
 end
 
 bash "install git" do
-  cwd '/usr/local/src/git'
   code <<-EOC
-   make prefix=/usr/local/stow/#{node.git.version} all
-   make prefix=/usr/local/stow/#{node.git.version} install
+   cd /usr/local/src/git
+   make clean
+   make prefix=/usr/local/stow/git-#{node.git.version} all
+   make prefix=/usr/local/stow/git-#{node.git.version} install
+   cd /usr/local/stow
+   stow -v git-#{node.git.version}
   EOC
-  cwd '/usr/local/stow'
-  code <<-EOC
-   stow -v #{node.git.version}
-  EOC
+end
+
+package "git" do
+  action :remove
+  options "-y"
 end
