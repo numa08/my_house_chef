@@ -25,8 +25,8 @@ package "stow" do
 end
 
 directory "/usr/local/stow" do
-  owner root
-  group root
+  owner "root"
+  group "root"
   mode 0755
   action :create
   no_if { File.exists "/usr/local/stow" }
@@ -41,8 +41,8 @@ end
 end
 
 directory "/usr/local/src" do
-  owner root
-  group root
+  owner "root"
+  group "root"
   mode 0755
   action :create
   no_if { File.exists "/usr/local/src"}
