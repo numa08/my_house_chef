@@ -24,6 +24,17 @@ end
   end
 end
 
+file::File.join("/etc/ld.so.conf.d/usr_local.conf", "/usr/local/lib") do
+  mode "0444"
+  action :create_if_missing
+end
+
+bash "ldconfig" do
+  code <<-EOC
+   ldconfig
+  EOC
+end
+
 # Application version controll system
 # stow
 
