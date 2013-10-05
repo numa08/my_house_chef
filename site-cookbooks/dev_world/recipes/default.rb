@@ -140,3 +140,43 @@ bash "install vim" do
   EOC
   not_if {File.exists?('/usr/local/bin/vim')}
 end
+
+# Build latest version tmux
+
+git "/usr/local/src/libevent/" do
+  repository "git@github.com:libevent/libevent.git"
+  reference "#{node.libevent.version}"
+  action :checkout
+  not_if {File.exists?('/usr/local/lib/libevent.a')}
+end
+
+bash "install libevent" do
+  code <<-EOC
+   cd /usr/local/src/libevent
+   autoconf
+   ./configure --prefix=/usr/local/stow/libevent-#{node.libevent.version}
+   make
+   make install
+   cd /usr/local/stow
+   stow -v libevent-#{node.libevent.version}
+  EOC
+  not_if {File.exists?('/usr/local/lib/libevent.a')}
+end
+
+git "/usr/local/src/tmux" do
+  repository "git://git.code.sf.net/p/tmux/tmux-code tmux-tmux-code"
+  reference "#{node.tmux.version}"
+  action :checkout
+  not_if {File.exists?('/usr/local/bin/tmux')}
+end
+
+bash "install tmux" do
+  code <<-EOC
+   cd /usr/local/src/tmux
+   autoconf
+   ./configure --prefix=/usr/local/stow/tmux-#{node.tmux.version}
+   make
+   make install
+  EOC
+  not_if {File.exists?("/usr/local/bin/tmux")}
+end 
