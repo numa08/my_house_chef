@@ -146,7 +146,7 @@ end
 # Build latest version tmux
 
 git "/usr/local/src/libevent/" do
-  repository "git@github.com:libevent/libevent.git"
+  repository "https://github.com/libevent/libevent.git"
   reference "#{node.libevent.version}"
   action :checkout
   not_if {File.exists?('/usr/local/lib/libevent.a')}
@@ -166,7 +166,7 @@ bash "install libevent" do
 end
 
 git "/usr/local/src/tmux" do
-  repository "git://git.code.sf.net/p/tmux/tmux-code tmux-tmux-code"
+  repository "git://git.code.sf.net/p/tmux/tmux-code"
   reference "#{node.tmux.version}"
   action :checkout
   not_if {File.exists?('/usr/local/bin/tmux')}
