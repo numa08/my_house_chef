@@ -109,4 +109,8 @@ bash "install zsh" do
   not_if {File.exists?('/usr/local/bin/zsh')}
 end
 
-
+mercurial "/usr/local/src/vim" do
+  repository "https://vim.googlecode.com/hg/"
+  reference "#{node.vim.version}"
+  action :sync
+end
