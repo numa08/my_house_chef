@@ -11,7 +11,13 @@
 # Install VCS
 # The Time is GIT!!!
 
-["git", "subversion", "mercurial"].each do |pkg|
+package "git" do
+  action :install
+  options "-y"
+  not_if {File.exists?('/usr/local/bin/git')}
+end
+
+["subversion", "mercurial"].each do |pkg|
   package pkg do
     action :install
     options "-y"
@@ -66,6 +72,7 @@ bash "install git" do
    cd /usr/local/stow
    stow -v git-#{node.git.version}
   EOC
+  not_if {File.exists?('/usr/local/bin/git')}
 end
 
 package "git" do
