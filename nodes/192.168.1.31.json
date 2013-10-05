@@ -1,4 +1,5 @@
 {"run_list":[
     "yum::epel",
+    "mercurial::default",
     "recipe[dev_world]"
   ]}
