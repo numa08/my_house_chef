@@ -16,11 +16,12 @@ end
 bash "setup vimrc" do
   code <<-EOC
   curl "https://gist.github.com/numa08/6869505/raw/e2e593880b2dc9c3b59174e761f3aef48dd73f2d/.vimrc" > #{node.user.home}/.vimrc
+  mkdir -p #{node.user.home}/.vim/bundle
   EOC
 end
 
 git "#{node.user.home}/.vim/bundle" do
-  repositry "https://github.com/Shougo/neobundle.vim.git"
+  repository "https://github.com/Shougo/neobundle.vim.git"
   action :checkout
 end
 
