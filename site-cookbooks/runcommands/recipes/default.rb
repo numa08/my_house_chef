@@ -20,7 +20,7 @@ bash "setup vimrc" do
   EOC
 end
 
-git "#{node.user.home}/.vim/bundle" do
+git "#{node.user.home}/.vim/bundle/neobundle.vim" do
   repository "https://github.com/Shougo/neobundle.vim.git"
   action :checkout
 end
