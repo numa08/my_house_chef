@@ -62,7 +62,7 @@ end
 
 # Build latest version git
 
-["curl-devel","expat-devel", "gettext-devel", "openssl-devel", "zlib-devel", "perl-devel", "pkgconfig", "libtool"].each do |pkg|
+["curl-devel","expat-devel", "gettext-devel", "openssl-devel", "zlib-devel", "perl-devel", "pkgconfig", "libtool", "ncurses", "ncurses-devel"].each do |pkg|
   package pkg do
     action :install
     options "-y"
