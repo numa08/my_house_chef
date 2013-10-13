@@ -6,6 +6,13 @@
 #
 # All rights reserved - Do Not Redistribute
 
+template ".java.zsh" do
+  path "/root/.java.zsh"
+  souce ".java.zsh.rtb"
+  owner "root"
+  group "root"
+  mode 0644
+end
 
 git "/usr/local/src/ant" do
   repository "git://git.apache.org/ant.git"
