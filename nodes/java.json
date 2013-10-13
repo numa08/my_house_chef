@@ -1,0 +1,14 @@
+{
+  "java": {
+    "install_flavor": "oracle",
+    "jdk_version": 7,
+    "java_home": "/usr/local/java",
+    "oracle" : {
+      "accept_oracle_download_terms": true
+    }
+  },
+  "run_list" : [
+    "recipe[java]",
+    "recipe[java_devel]"
+      ]
+}
