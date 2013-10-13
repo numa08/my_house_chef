@@ -14,6 +14,15 @@ git "/usr/local/src/ant" do
   not_if {File.exists?('/usr/local/bin/ant')}
 end
 
+bash "install ant" do
+  code <<-EOC
+   cd /usr/local/src/ant
+   sh build.sh
+   mv ./dist /usr/local/stow/ant-#{node.ant.version}
+   cd /usr/local/stow
+   stow ant-#{node.ant.version}
+  EOC
+end
 
 git "/usr/local/src/maven" do
   repository "git://git.apache.org/maven.git"
