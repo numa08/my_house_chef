@@ -26,7 +26,7 @@ end
 
 git "/usr/local/src/maven" do
   repository "git://git.apache.org/maven.git"
-  reference "#{node.mvn.version}"
+  reference "maven-#{node.mvn.version}"
   action :checkout
   not_if {File.exists?("/usr/local/bin/mvn")}
 end
