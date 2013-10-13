@@ -30,3 +30,12 @@ git "/usr/local/src/maven" do
   action :checkout
   not_if {File.exists?("/usr/local/bin/mvn")}
 end
+
+bash "install maven" do
+  code <<-EOC
+   cd /usr/local/src/maven
+   ant
+   cd /usr/local/stow
+   stow maven-#{node.mvn.version}
+  EOC
+end
