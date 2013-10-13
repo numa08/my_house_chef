@@ -8,14 +8,14 @@
 
 template ".java.zsh" do
   path "/root/.java.zsh"
-  souce ".java.zsh.rtb"
+  source ".java.zsh.erb"
   owner "root"
   group "root"
   mode 0644
 end
 
 git "/usr/local/src/ant" do
-  repository "git://git.apache.org/ant.git"
+  repository "https://github.com/apache/ant.git"
   reference "#{node.ant.version}"
   action :checkout
   not_if {File.exists?('/usr/local/bin/ant')}
@@ -32,7 +32,7 @@ bash "install ant" do
 end
 
 git "/usr/local/src/maven" do
-  repository "git://git.apache.org/maven.git"
+  repository "https://github.com/apache/maven.git"
   reference "maven-#{node.mvn.version}"
   action :checkout
   not_if {File.exists?("/usr/local/bin/mvn")}
@@ -40,6 +40,7 @@ end
 
 bash "install maven" do
   code <<-EOC
+   source ~/.java.zsh
    cd /usr/local/src/maven
    ant
    cd /usr/local/stow
