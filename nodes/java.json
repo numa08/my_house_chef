@@ -2,7 +2,7 @@
   "java": {
     "install_flavor": "oracle",
     "jdk_version": 7,
-    "java_home": "/usr/local/java",
+    "java_home": "/usr/java/default",
     "oracle" : {
       "accept_oracle_download_terms": true
     }
