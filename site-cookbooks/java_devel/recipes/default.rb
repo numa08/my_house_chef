@@ -24,6 +24,7 @@ end
 bash "install ant" do
   code <<-EOC
    cd /usr/local/src/ant
+   source ~/.java.zsh
    sh build.sh
    mv ./dist /usr/local/stow/ant-#{node.ant.version}
    cd /usr/local/stow
