@@ -26,7 +26,8 @@ NeoBundle 'mattn/emmet-vim'
 NeoBundle 'tpope/vim-markdown'
 NeoBundle 'derekwyatt/vim-scala'
 NeoBundle 'vim-scripts/nginx.vim'
-
+NeoBundle 'kannokanno/previm'
+NeoBundle 'tpope/vim-surround'
 filetype plugin indent on
 
 NeoBundleCheck
