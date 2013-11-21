@@ -113,7 +113,7 @@ bash "install zsh" do
   code <<-EOC
    cd /usr/local/src/zsh
    autoconf
-   ./configure --prefix=/usr/local/stow/zsh-#{node.zsh.version}
+   ./configure --prefix=/usr/local/stow/zsh-#{node.zsh.version} --with-tcsetpgrp
    make
    make install
    cd /usr/local/stow/
