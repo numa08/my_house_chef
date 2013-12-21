@@ -185,8 +185,3 @@ bash "install tmux" do
   EOC
   not_if {File.exists?("/usr/local/bin/tmux")}
 end 
-
-include_recipe "rbenv::default"
-include_recipe "rbenv::ruby_build"
-
-rbenv_ruby "2.0.0-p247"
